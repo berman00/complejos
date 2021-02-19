@@ -8,7 +8,9 @@ import cmath as m
 import tkinter as tk
 from tkinter.constants import *
 
-root = tk.Tk()
+#############
+# Parametros
+#############
 
 # Tamaño de las gráficas
 cWidth = 400
@@ -17,11 +19,8 @@ cHeight = 400
 # Espacio debajo para controles
 espacioDebajo = 100
 
-# Configura el tamaño de la ventana
-winWidth = cWidth*2 + 10
-winHeight = cHeight + espacioDebajo
-root.geometry('%dx%d' % (winWidth, winHeight))
-root.resizable(False, False)
+# Tamaño de los títulos
+tamnTitulo = 16
 
 
 ##########
@@ -50,7 +49,7 @@ class Grafico(tk.Canvas):
 # Funciones
 #############
 
-# Funciones asociadas a la lógica del programa
+# Lógica del programa
 def coord2complex(x,y,cWidth=cWidth,cHeight=cHeight):
 	'''
 	Convierte coordenadas dadas por tkinter en un número complejo
@@ -70,7 +69,7 @@ def complex2coord(z, cWidth=cWidth, cHeight=cHeight):
 
 	return x, y
 
-# Comandos asociados a eventos de la gui
+# Manejo de eventos de la gui
 def dibujarEntrada(event):
 	cEntrada.create_rectangle(event.x-1, event.y-1, event.x+1, event.y+1, outline='#55f', fill='#55f', tag='dibujo')
 
@@ -105,11 +104,23 @@ def borrar():
 # GUI
 #######
 
+# Inicio
+
+root = tk.Tk()
+
+# Configura el tamaño de la ventana
+winWidth = cWidth*2 + 10
+winHeight = cHeight + espacioDebajo + tamnTitulo + 8 # 8 incluye el tamaño del espaciado del título
+root.geometry('%dx%d' % (winWidth, winHeight))
+root.resizable(False, False)
+
+# Título
+root.title("Visuaizador complejos")
 
 # Entrada
 
 # Titulo
-lEntrada = tk.Label(text="Entrada", font="Default 16")
+lEntrada = tk.Label(text="Entrada", font=f"Default {tamnTitulo}", pady=4)
 lEntrada.grid(row=0, column=0)
 
 # Gráfico
@@ -123,7 +134,7 @@ cEntrada.bind("<B1-Motion>", dibujar)
 # Salida
 
 # Titulo
-lSalida = tk.Label(text="Salida", font="Default 16")
+lSalida = tk.Label(text="Salida", font=f"Default {tamnTitulo}", pady=4)
 lSalida.grid(row=0,column=1)
 
 # Gráfico
