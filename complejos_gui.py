@@ -4,24 +4,31 @@ Valentin Berman - 18/02/20
 Programa para visualizar transformaciones en el plano complejo
 '''
 
-from tkinter import *
 import cmath as m
+import tkinter as tk
+from tkinter.constants import *
 
-root = Tk()
-winWidth = 810
-winHeight = 500
-root.geometry('%dx%d' % (winWidth, winHeight))
-root.resizable(False, False)
+root = tk.Tk()
 
 # Tamaño de las gráficas
 cWidth = 400
-cHeight = 400 # Como winHeight es 500 deja 100 de espacio debajo
+cHeight = 400
+
+# Espacio debajo para controles
+espacioDebajo = 100
+
+# Configura el tamaño de la ventana
+winWidth = cWidth*2 + 10
+winHeight = cHeight + espacioDebajo
+root.geometry('%dx%d' % (winWidth, winHeight))
+root.resizable(False, False)
+
 
 ##########
 # Clases
 ##########
 
-class Grafico(Canvas):
+class Grafico(tk.Canvas):
 	'''
 	Clase para crear los canvas sobre que hacen de entrada y salida
 	'''
@@ -102,7 +109,7 @@ def borrar():
 # Entrada
 
 # Titulo
-lEntrada = Label(text="Entrada", font="Default 16")
+lEntrada = tk.Label(text="Entrada", font="Default 16")
 lEntrada.grid(row=0, column=0)
 
 # Gráfico
@@ -116,7 +123,7 @@ cEntrada.bind("<B1-Motion>", dibujar)
 # Salida
 
 # Titulo
-lSalida = Label(text="Salida", font="Default 16")
+lSalida = tk.Label(text="Salida", font="Default 16")
 lSalida.grid(row=0,column=1)
 
 # Gráfico
@@ -127,10 +134,10 @@ cSalida.grid(row=1, column=1, sticky = NE)
 # Controles de abajo
 
 # Contenedor
-contenedorControles = Frame(root)
+contenedorControles = tk.Frame(root)
 contenedorControles.grid(row=2, column=0, columnspan=2, sticky=NSEW)
 
-bBorrar = Button(contenedorControles, text='Borrar', command=borrar)
+bBorrar = tk.Button(contenedorControles, text='Borrar', command=borrar)
 bBorrar.grid(row=1, column = 5)
 
 
